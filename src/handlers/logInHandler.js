@@ -13,7 +13,7 @@ function login(req, res, next) {
                 if (!match) {
                     res.status(401).send({error:" invalid email or password"})
                 } else {
-                    const token = jwt.sign({ user: result.id }, process.env.JWT_SECRET);
+                    const token = jwt.sign({ user: result[0]._id }, process.env.JWT_SECRET);
                     res.status(200).send({ access_token: token })
                 }
             }).catch(next)

@@ -15,6 +15,10 @@ const getWIshById = require("./src/handlers/getWishByIdHandler")
 const getWishesForEvent = require("./src/handlers/getWishesForEventHandler")
 const signUpHandler = require("./src/handlers/signUpHandler")
 const logInHandler = require("./src/handlers/logInHandler")
+const verfyuser =require("./src/middleware/verifyUser")
+const errorHandling=require("./src/middleware/errorHandler")
+const urlValidation=require("./src/middleware/urlValidation");
+const URLValidation = require("./src/middleware/urlValidation");
 server.use(cors());
 server.use(express.json());
 connectDB();
@@ -27,6 +31,7 @@ server.get("/", (req, res, next) => {
 });
 
 server.post("/login", logInHandler)
+
 server.post("/signUp", signUpHandler)
 
 server.get("/events", getEventsHandler);
@@ -39,15 +44,15 @@ server.get("/wish/:id", getWIshById);
 
 server.get("/userEvents/:id", getUserEventsHandler)
 
-server.post("/addEvent", addEventHandler)
+server.post("/addEvent",verfyuser, addEventHandler)
 
-server.post("/addWish", addWish);
+server.post("/addWish",verfyuser, addWish);
 
-server.delete("/events/:id", deleteEventHandler)
+server.delete("/events/:id", verfyuser, deleteEventHandler)
 
-server.delete("/wish/:id", deleteWish);
+server.delete("/wish/:id", verfyuser,deleteWish);
 
-server.put("/events", editEventHandler)
+server.put("/events",verfyuser, editEventHandler)
 
 
 server.put("/userProfile", (req, res, next) => {
@@ -57,6 +62,9 @@ server.put("/userProfile", (req, res, next) => {
 server.put("/coverImage", (req, res, next) => {
     res.status(200).send("<h1>updatecoverImageHandler</h1>");
 });
+
+server.use(URLValidation)
+server.use(errorHandling)
 
 
 
