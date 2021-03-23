@@ -3,6 +3,12 @@ const PORT = process.env.PORT || 4000;
 const connectDB = require("./src/database/connection");
 const cors = require('cors');
 const server = express();
+const addEventHandler = require("./src/handlers/addEventHandler")
+const getEventsHandler = require("./src/handlers/getEventsHandler")
+const getEventByIdHandler = require("./src/handlers/getEventByIdHandler")
+const editEventHandler = require("./src/handlers/editEventHandler")
+const getUserEventsHandler = require("./src/handlers/getUserEventsHandler")
+const deleteEventHandler = require("./src/handlers/deleteEventHandler")
 server.use(cors());
 server.use(express.json());
 connectDB();
@@ -25,37 +31,25 @@ server.post("/signUp", (req, res, next) => {
     res.status(200).send("<h1>signUpHandler</h1>");
 });
 
-server.get("/events", (req, res, next) => {
-    res.status(200).send("<h1>getEventsHandler</h1>");
-});
+server.get("/events", getEventsHandler);
 
-server.get("/events/:id", (req, res, next) => {
-    res.status(200).send("<h1>getEventById</h1>");
-});
+server.get("/events/:id", getEventByIdHandler)
 
 server.get("/events/:id/wishes", getWishesForEvent);
 
 server.get("/wish/:id", getWIshById);
 
-server.get("/userEvents/:id", (req, res, next) => {
-    res.status(200).send("<h1>getUserEventHandler</h1>");
-});
+server.get("/userEvents/:id", getUserEventsHandler)
 
-server.post("/addEvent", (req, res, next) => {
-    res.status(200).send("<h1>addEventHandler</h1>");
-});
+server.post("/addEvent", addEventHandler)
 
 server.post("/addWish", addWish);
 
-server.delete("/event/:id", (req, res, next) => {
-    res.status(200).send("<h1>deleteEventHandler</h1>");
-});
+server.delete("/events/:id", deleteEventHandler)
 
 server.delete("/wish/:id", deleteWish);
 
-server.put("/event/:id", (req, res, next) => {
-    res.status(200).send("<h1>editEventHandler</h1>");
-});
+server.put("/events", editEventHandler)
 
 
 server.put("/userProfile", (req, res, next) => {
