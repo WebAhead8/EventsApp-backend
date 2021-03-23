@@ -7,14 +7,14 @@ const event = mongoose.Schema({
   title: {
     type: String,
   },
-  description: { 
-      type: String 
-    },
-    date:{
-        Type :String
-    },
-    location:{
-        type:String
-    }
+  description: {
+    type: String,
+  },
+  date: {
+    type: String,
+  },
+  location: {
+    type: String,
+  }
 });
 module.exports = Event = mongoose.model("event", event);

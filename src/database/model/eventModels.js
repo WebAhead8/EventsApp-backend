@@ -3,7 +3,9 @@ const Event = require("../schema/Event");
 const Wish = require("../schema/Wish");
 
 function addEvent(eventDetails) {
+  eventDetails.owner = mongoose.Types.ObjectId(eventDetails.owner);
   let eventModel = new Event(eventDetails);
+  console.log(eventModel)
   return eventModel.save();
 }
 
@@ -51,7 +53,7 @@ function editEventLocation(eventDetails) {
 
 function deleteEvent(eventId) {
   const objectId = mongoose.Types.ObjectId(eventId);
-  return Wish.deleteOne({ _id: objectId });
+  return Event.deleteOne({ _id: objectId });
 }
 
 function getUserEvents(userId) {
