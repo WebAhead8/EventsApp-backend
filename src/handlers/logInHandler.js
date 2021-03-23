@@ -7,24 +7,19 @@ function login(req, res, next) {
     const email = req.body.email;
     const password = req.body.password;
 
-
     model.getUserByEmail(email).then(result => {
-        if (result) {
-            bcrypt.compare(password, result.password).then(match => {
+        if (result[0]) {
+            bcrypt.compare(password, result[0].password).then(match => {
                 if (!match) {
-                    const error = new Error("no user Found");
-                    error.status = 404;
-                    next(error);
+                    res.status(401).send({error:" invalid email or password"})
                 } else {
-                    const token = jwt.sign({ user: result.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+                    const token = jwt.sign({ user: result.id }, process.env.JWT_SECRET);
                     res.status(200).send({ access_token: token })
                 }
-            })
+            }).catch(next)
 
         } else {
-            const error = new Error("no user Found");
-            error.status = 404;
-            next(error);
+            res.status(401).send({error:" invalid email or password"})
         }
     }).catch(next)
 
