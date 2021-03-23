@@ -12,7 +12,7 @@ function getWishesForEventHandler(req, res, next) {
       else {
         res.status(204).send({ status: "no wishes for this event" })
       }
-    })
+    }).catch(next)
 
 
 }

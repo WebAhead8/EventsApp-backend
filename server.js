@@ -9,27 +9,25 @@ const getEventByIdHandler = require("./src/handlers/getEventByIdHandler")
 const editEventHandler = require("./src/handlers/editEventHandler")
 const getUserEventsHandler = require("./src/handlers/getUserEventsHandler")
 const deleteEventHandler = require("./src/handlers/deleteEventHandler")
-server.use(cors());
-server.use(express.json());
-connectDB();
-
 const addWish = require("./src/handlers/addWishHandler");
 const deleteWish = require("./src/handlers/deleteWishHandler");
 const getWIshById = require("./src/handlers/getWishByIdHandler")
 const getWishesForEvent = require("./src/handlers/getWishesForEventHandler")
+const signUpHandler = require("./src/handlers/signUpHandler")
+const logInHandler = require("./src/handlers/logInHandler")
+server.use(cors());
+server.use(express.json());
+connectDB();
+
+
 
 
 server.get("/", (req, res, next) => {
     res.status(200).send("<h1>first open</h1>");
 });
 
-server.post("/login", (req, res, next) => {
-    res.status(200).send("<h1>loginHandler</h1>");
-});
-
-server.post("/signUp", (req, res, next) => {
-    res.status(200).send("<h1>signUpHandler</h1>");
-});
+server.post("/login", logInHandler)
+server.post("/signUp", signUpHandler)
 
 server.get("/events", getEventsHandler);
 

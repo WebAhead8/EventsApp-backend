@@ -5,7 +5,6 @@ const Wish = require("../schema/Wish");
 function addEvent(eventDetails) {
   eventDetails.owner = mongoose.Types.ObjectId(eventDetails.owner);
   let eventModel = new Event(eventDetails);
-  console.log(eventModel)
   return eventModel.save();
 }
 

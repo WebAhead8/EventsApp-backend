@@ -11,7 +11,7 @@ function verfyuser(req, res, next) {
     try {
         const token = auth.replace('Bearer ', '');
         const userID = jwt.verify(token, process.env.JWT_SECRET);
-        model.getUserById(userID.id).then(data => {
+        model.getUserById(userID.user).then(data => {
             if (data.length > 0) {
                 req.user = data[0]._id;
                 next();
