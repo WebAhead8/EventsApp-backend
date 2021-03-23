@@ -10,4 +10,9 @@ function addUser({ details }) {
 function getUserByEmail(email) {
     return User.find({ email: email })
 }
-module.exports = { getUserByEmail, addUser };
+
+function getUserById(id) {
+  const objectId = mongoose.Types.ObjectId(id);
+    return User.find({ _id: objectId })
+}
+module.exports = { getUserByEmail, addUser,getUserById };
