@@ -14,7 +14,7 @@ function getWishByIdHandler(req, res, next) {
         res.status(404).send({ status: "invalid wish id" });
       }
 
-    }).catch(err => console.log(err));
+    }).catch(next);
 }
 
 module.exports = getWishByIdHandler;
