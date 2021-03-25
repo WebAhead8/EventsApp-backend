@@ -15,7 +15,18 @@ function getEventById(eventId) {
 }
 
 function getAllEvents() {
-  return Event.find({});
+  // return Event.find({});
+
+  return Event.aggregate([
+    { 
+        "$lookup": { 
+            "from": 'users', 
+            "localField": 'owner', 
+            "foreignField": '_id', 
+            "as": 'owner' 
+        } 
+    }
+])
 }
 
 function editEventTitle(eventDetails) {
