@@ -11,22 +11,49 @@ function addEvent(eventDetails) {
 function getEventById(eventId) {
   const objectId = mongoose.Types.ObjectId(eventId);
   const obj = { _id: objectId };
-  return Event.find(obj);
+  return Event.aggregate([
+    { $match: { _id: objectId } },
+    {
+      $lookup: {
+        from: "users",
+        as: "owner",
+        let: { ownerId: "$owner" },
+
+        pipeline: [
+          {
+            $match: {
+              $expr: { $eq: ["$$ownerId", "$_id"] },
+            },
+          },
+          { $project: { firstName:1,lastName:1,email: 1,birthday: 1,phoneNumber: 1}}
+        ],
+      },
+    },
+  ]);
 }
 
 function getAllEvents() {
   // return Event.find({});
 
   return Event.aggregate([
-    { 
-        "$lookup": { 
-            "from": 'users', 
-            "localField": 'owner', 
-            "foreignField": '_id', 
-            "as": 'owner' 
-        } 
-    }
-])
+
+    {
+      $lookup: {
+        from: "users",
+        as: "owner",
+        let: { ownerId: "$owner" },
+
+        pipeline: [
+          {
+            $match: {
+              $expr: { $eq: ["$$ownerId", "$_id"] },
+            },
+          },
+          { $project: { firstName:1,lastName:1,email: 1,birthday: 1,phoneNumber: 1}}
+        ],
+      },
+    },
+  ]);
 }
 
 function editEventTitle(eventDetails) {
