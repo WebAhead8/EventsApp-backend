@@ -8,7 +8,7 @@ const id=req.params.id;
             {   
                 res.status(200).send(data)
             }else{
-                res.status(400).send({status:"no event for this user"})
+                res.status(401).send({status:"no event for this user"})
 
             }
         })
