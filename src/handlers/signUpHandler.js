@@ -21,8 +21,7 @@ function signUpHandler(req,res,next){
                     
                     model.addUser(body).then(user=>{
                         const token = jwt.sign({ user: user.id }, process.env.JWT_SECRET);
-                        user.access_token = token;
-                        res.status(201).send(user);
+                        res.status(201).send({access_token:token});
                     }).catch(err=>{
                         if(err.code===11000)
                         {
