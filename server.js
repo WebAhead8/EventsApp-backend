@@ -9,6 +9,7 @@ const getEventByIdHandler = require("./src/handlers/getEventByIdHandler")
 const editEventHandler = require("./src/handlers/editEventHandler")
 const getUserEventsHandler = require("./src/handlers/getUserEventsHandler")
 const deleteEventHandler = require("./src/handlers/deleteEventHandler")
+const getMyEvents = require("./src/handlers/getMyEvents")
 const addWish = require("./src/handlers/addWishHandler");
 const deleteWish = require("./src/handlers/deleteWishHandler");
 const getWIshById = require("./src/handlers/getWishByIdHandler")
@@ -43,6 +44,8 @@ server.get("/events/:id/wishes", getWishesForEvent);
 server.get("/wish/:id", getWIshById);
 
 server.get("/userEvents/:id", getUserEventsHandler)
+
+server.get("/myEvents", verfyuser,getMyEvents)
 
 server.post("/addEvent",verfyuser, addEventHandler)
 

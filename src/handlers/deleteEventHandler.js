@@ -4,7 +4,7 @@ function deleteEventHandler(req, res, next) {
  
     model.getEventById(id).then((event) => {
         if (event.length > 0) {
-            if (JSON.stringify(event[0].owner) === JSON.stringify(req.user)) {
+            if (JSON.stringify(event[0].owner[0]._id) === JSON.stringify(req.user)) {
                 
                 model.deleteEvent(id).then((data) => {
                   res.status(200).send({ status: "event deleted successfully" });

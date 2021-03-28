@@ -10,9 +10,9 @@ model.getEventById(body.id).then(event=>{
     if(event.length>0)
     {
  
-        if(JSON.stringify(event[0].owner)===JSON.stringify(req.user))
+        if(JSON.stringify(event[0].owner[0]._id)===JSON.stringify(req.user))
         {
-
+            
             if(!body.title || !body.description || !body.date || !body.location )
             {
             res.status(422).send({status:"some of the field are not registered"})       
