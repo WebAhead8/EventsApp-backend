@@ -11,6 +11,9 @@ const wish = mongoose.Schema({
     },
     wish: {
         type: String
+    },
+    image: {
+        type: String
     }
 });
 module.exports = Wish = mongoose.model("wish", wish);
