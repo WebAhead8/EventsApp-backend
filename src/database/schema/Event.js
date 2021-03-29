@@ -18,6 +18,10 @@ const event = mongoose.Schema({
   },
   location: {
     type: String,
+  },
+  image: {
+    type: String,
   }
+  
 });
 module.exports = Event = mongoose.model("event", event);
