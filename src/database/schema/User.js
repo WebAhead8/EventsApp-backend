@@ -11,13 +11,16 @@ const user = mongoose.Schema({
     lastName: {
         type: String
     },
-    birthday:{
+    birthday: {
         type: String
     },
     phoneNumber: {
         type: String
     },
     password: {
+        type: String
+    },
+    profileImage: {
         type: String
     }
 })
