@@ -18,7 +18,7 @@ function getWishesForEvent(eventId) {
               $expr: { $eq: ["$$ownerId", "$_id"] },
             },
           },
-          { $project: { _id:0,firstName:1,lastName:1}}
+          { $project: { _id:1,firstName:1,lastName:1}}
         ],
       },
     },

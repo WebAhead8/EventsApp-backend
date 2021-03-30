@@ -9,7 +9,7 @@ function deleteWishHandler(req, res, next) {
       eventmodel
         .getEventById(wish[0].event)
         .then((event) => {
-          if (JSON.stringify(event[0].owner) === JSON.stringify(req.user)) {
+          if (JSON.stringify(event[0].owner[0]._id) === JSON.stringify(req.user) || JSON.stringify(wish[0].owner)===JSON.stringify(req.user)) {
             model
               .deleteWish(wishId)
               .then((data) => {
