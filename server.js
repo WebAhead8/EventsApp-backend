@@ -21,6 +21,7 @@ const verfyuser = require("./src/middleware/verifyUser")
 const errorHandling = require("./src/middleware/errorHandler")
 const urlValidation = require("./src/middleware/urlValidation");
 const URLValidation = require("./src/middleware/urlValidation");
+const editUserHandler = require("./src/handlers/editUserHandler");
 server.use(cors());
 server.use(express.json());
 connectDB();
@@ -58,7 +59,11 @@ server.delete("/wish/:id", verfyuser, deleteWish);
 
 server.put("/events", verfyuser, editEventHandler)
 
-server.get("/userToken", verfyuser, getUserByToken)
+server.get("/userToken", verfyuser, getUserByToken);
+
+server.put("/editUser", verfyuser, editUserHandler);
+
+
 
 
 
