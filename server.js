@@ -14,11 +14,12 @@ const addWish = require("./src/handlers/addWishHandler");
 const deleteWish = require("./src/handlers/deleteWishHandler");
 const getWIshById = require("./src/handlers/getWishByIdHandler")
 const getWishesForEvent = require("./src/handlers/getWishesForEventHandler")
+const getUserByToken = require("./src/handlers/getUserByToken")
 const signUpHandler = require("./src/handlers/signUpHandler")
 const logInHandler = require("./src/handlers/logInHandler")
-const verfyuser =require("./src/middleware/verifyUser")
-const errorHandling=require("./src/middleware/errorHandler")
-const urlValidation=require("./src/middleware/urlValidation");
+const verfyuser = require("./src/middleware/verifyUser")
+const errorHandling = require("./src/middleware/errorHandler")
+const urlValidation = require("./src/middleware/urlValidation");
 const URLValidation = require("./src/middleware/urlValidation");
 server.use(cors());
 server.use(express.json());
@@ -45,17 +46,20 @@ server.get("/wish/:id", getWIshById);
 
 server.get("/userEvents/:id", getUserEventsHandler)
 
-server.get("/myEvents", verfyuser,getMyEvents)
+server.get("/myEvents", verfyuser, getMyEvents)
 
-server.post("/addEvent",verfyuser, addEventHandler)
+server.post("/addEvent", verfyuser, addEventHandler)
 
-server.post("/addWish",verfyuser, addWish);
+server.post("/addWish", verfyuser, addWish);
 
 server.delete("/events/:id", verfyuser, deleteEventHandler)
 
-server.delete("/wish/:id", verfyuser,deleteWish);
+server.delete("/wish/:id", verfyuser, deleteWish);
 
-server.put("/events",verfyuser, editEventHandler)
+server.put("/events", verfyuser, editEventHandler)
+
+server.get("/userToken", verfyuser, getUserByToken)
+
 
 
 server.put("/userProfile", (req, res, next) => {
