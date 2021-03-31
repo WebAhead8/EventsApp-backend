@@ -3,10 +3,10 @@ const JWT = require('jsonwebtoken');
 const dotenv = require('dotenv')
 const bcrypt = require("bcryptjs");
 dotenv.config()
-function getUserByTokenHandler(req, res, next) {
+function getUserByEmail(req, res, next) {
 
-  const user = req.user;
-  model.getUserById(user)
+  const email =req.body.email;
+  model.getUserByEmail(email)
     .then(result => {
       if (result.length>0) {
         result[0].password="";
@@ -19,4 +19,4 @@ function getUserByTokenHandler(req, res, next) {
     }).catch(next)
 
 }
-module.exports = getUserByTokenHandler;
+module.exports = getUserByEmail;
