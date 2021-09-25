@@ -23,8 +23,11 @@ const urlValidation = require("./src/middleware/urlValidation");
 const URLValidation = require("./src/middleware/urlValidation");
 const editUserHandler = require("./src/handlers/editUserHandler");
 const getUserByEmail = require("./src/handlers/getUserByEmail");
+const uploadHandler = require("./src/handlers/uploadHandler");
+const uploadImage = require("./src/handlers/uploadHandler");
 server.use(cors());
 server.use(express.json());
+server.use(express.static('public'));
 connectDB();
 
 
@@ -66,6 +69,7 @@ server.post("/userdetails", getUserByEmail);
 
 server.put("/editUser", verfyuser, editUserHandler);
 
+server.post('/upload',uploadImage);
 
 
 

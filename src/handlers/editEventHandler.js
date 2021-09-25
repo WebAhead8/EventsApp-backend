@@ -17,10 +17,12 @@ model.getEventById(body.id).then(event=>{
             {
             res.status(422).send({status:"some of the field are not registered"})       
             }else{
-            
+                
                 model.editEventTitle({id:body.id,title:body.title}).catch(next);
                 model.editEventDescription({id:body.id,description:body.description}).catch(next)
                 model.editEventLocation({id:body.id,location:body.location}).catch(next)
+                if (body.image){
+                    model.editEventImage({id:body.id,image:body.image})}
                 model.editEventDate({id:body.id,date:body.date}).then(data=>{
             res.status(200).send({status:"event updated successfully"})      
             

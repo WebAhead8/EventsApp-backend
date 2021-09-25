@@ -80,6 +80,15 @@ function editEventDate(eventDetails) {
   );
 }
 
+function editEventImage(eventDetails) {
+  const objectId = mongoose.Types.ObjectId(eventDetails.id);
+  
+  return Event.updateOne(
+    { _id: objectId },
+    { $set: { image: eventDetails.image } }
+  ).then(data=>{})
+}
+
 function editEventLocation(eventDetails) {
   const objectId = mongoose.Types.ObjectId(eventDetails.id);
   return Event.updateOne(
@@ -108,4 +117,5 @@ module.exports = {
   editEventDate,
   editEventLocation,
   deleteEvent,
+  editEventImage
 };
